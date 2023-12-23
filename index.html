@@ -12,28 +12,41 @@
     }
 
     #amount {
-      width: 80%;
-      padding: 10px;
-      margin-bottom: 10px; /* ボタンとの間隔 */
+      font-size: 20px;
+      padding: 15px;
+      margin-bottom: 20px;
+      width: 90%;
     }
 
     .discount-button {
-      width: 80%;
-      padding: 10px;
-      margin-bottom: 5px; /* ボタン間の間隔 */
+      font-size: 20px;
+      padding: 30px; /* ボタンの高さを増加 */
+      margin-bottom: 10px;
+      width: 45%; /* ボタンの幅を調整 */
+      margin-right: 5%; /* ボタン間の余白 */
+      float: left; /* ボタンを左に浮かせる */
+    }
+
+    .discount-button:nth-child(even) {
+      margin-right: 0; /* 右側のボタンの余白を削除 */
     }
 
     #result {
-      margin-top: 20px;
+      margin-top: 30px;
+      clear: both;
+      font-size: 40px; 
     }
   </style>
 </head>
 <body>
   <input type="number" id="amount" placeholder="金額を入力">
   <br>
+  <button class="discount-button" onclick="applyDiscount(3)">3% 割引</button>
   <button class="discount-button" onclick="applyDiscount(5)">5% 割引</button>
   <button class="discount-button" onclick="applyDiscount(10)">10% 割引</button>
+  <button class="discount-button" onclick="applyDiscount(15)">15% 割引</button>
   <button class="discount-button" onclick="applyDiscount(20)">20% 割引</button>
+  <button class="discount-button" onclick="applyDiscount(30)">30% 割引</button>
   <div id="result"></div>
 
   <script>
