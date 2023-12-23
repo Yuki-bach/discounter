@@ -11,50 +11,104 @@
       padding: 20px;
     }
 
-    #amount {
+    input, button, #result, #taxResult {
       font-size: 20px;
       padding: 15px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       width: 90%;
     }
 
-    .discount-button {
-      font-size: 20px;
-      padding: 30px; /* ボタンの高さを増加 */
+    button {
+      padding: 30px;
       margin-bottom: 10px;
-      width: 45%; /* ボタンの幅を調整 */
-      margin-right: 5%; /* ボタン間の余白 */
-      float: left; /* ボタンを左に浮かせる */
+      width: 45%;
+      margin-right: 5%;
+      float: left;
     }
 
-    .discount-button:nth-child(even) {
-      margin-right: 0; /* 右側のボタンの余白を削除 */
+    button:nth-child(even) {
+      margin-right: 0;
     }
 
-    #result {
-      margin-top: 30px;
+    .tab {
+      padding: 10px;
+      cursor: pointer;
+      display: inline-block;
+      border: 1px solid #ccc;
+      margin-right: 5px;
+    }
+
+    .active-tab {
+      background-color: #ddd;
+    }
+
+    .section {
+      display: none;
       clear: both;
-      font-size: 40px; 
+      padding-top: 20px;
+    }
+
+    .active-section {
+      display: block;
     }
   </style>
 </head>
 <body>
-  <input type="number" id="amount" placeholder="金額を入力">
-  <br>
-  <button class="discount-button" onclick="applyDiscount(3)">3% 割引</button>
-  <button class="discount-button" onclick="applyDiscount(5)">5% 割引</button>
-  <button class="discount-button" onclick="applyDiscount(10)">10% 割引</button>
-  <button class="discount-button" onclick="applyDiscount(15)">15% 割引</button>
-  <button class="discount-button" onclick="applyDiscount(20)">20% 割引</button>
-  <button class="discount-button" onclick="applyDiscount(30)">30% 割引</button>
-  <div id="result"></div>
+  <!-- タブメニュー -->
+  <div class="tab" onclick="switchTab('discountTab')">割引計算</div>
+  <div class="tab" onclick="switchTab('taxTab')">税抜き計算</div>
+
+  <!-- 割引機能のセクション -->
+  <div id="discountTab" class="section active-section">
+    <input type="number" id="amount" placeholder="金額を入力">
+    <br>
+    <button onclick="applyDiscount(3)">3% 割引</button>
+    <button onclick="applyDiscount(5)">5% 割引</button>
+    <button onclick="applyDiscount(10)">10% 割引</button>
+    <button onclick="applyDiscount(15)">15% 割引</button>
+    <button onclick="applyDiscount(20)">20% 割引</button>
+    <button onclick="applyDiscount(30)">30% 割引</button>
+    <div id="result"></div>
+  </div>
+
+  <!-- 税抜き計算機能のセクション -->
+  <div id="taxTab" class="section">
+    <input type="number" id="taxIncludedPrice" placeholder="税込価格を入力">
+    <br>
+    <button onclick="calculateTaxExcludedPrice(8)">税抜価格 (8%)</button>
+    <button onclick="calculateTaxExcludedPrice(10)">税抜価格 (10%)</button>
+    <div id="taxResult"></div>
+  </div>
 
   <script>
+    function switchTab(selectedTab) {
+      var tabs = document.querySelectorAll('.tab');
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].classList.remove('active-tab');
+      }
+      document.querySelector(`[onclick="switchTab('${selectedTab}')"]`).classList.add('active-tab');
+
+      var sections = document.querySelectorAll('.section');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+      }
+      document.getElementById(selectedTab).style.display = 'block';
+    }
+
     function applyDiscount(percentage) {
       var amount = document.getElementById('amount').value;
-      var discounted = amount - (amount * percentage / 100);
+      var discounted = Math.floor(amount - (amount * percentage / 100));
       document.getElementById('result').innerText = `割引後の金額: ${discounted}円`;
     }
+
+    function calculateTaxExcludedPrice(taxRate) {
+      var taxIncludedPrice = document.getElementById('taxIncludedPrice').value;
+      var taxExcludedPrice = Math.floor(taxIncludedPrice / (1 + taxRate / 100));
+      document.getElementById('taxResult').innerText = `税抜価格: ${taxExcludedPrice}円`;
+    }
+
+    // 初期表示設定
+    switchTab('discountTab');
   </script>
 </body>
 </html>
