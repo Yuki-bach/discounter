@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>割引計算アプリ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #amount {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 10px; /* ボタンとの間隔 */
+    }
+
+    .discount-button {
+      width: 80%;
+      padding: 10px;
+      margin-bottom: 5px; /* ボタン間の間隔 */
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <input type="number" id="amount" placeholder="金額を入力">
+  <br>
+  <button class="discount-button" onclick="applyDiscount(5)">5% 割引</button>
+  <button class="discount-button" onclick="applyDiscount(10)">10% 割引</button>
+  <button class="discount-button" onclick="applyDiscount(20)">20% 割引</button>
+  <div id="result"></div>
+
+  <script>
+    function applyDiscount(percentage) {
+      var amount = document.getElementById('amount').value;
+      var discounted = amount - (amount * percentage / 100);
+      document.getElementById('result').innerText = `割引後の金額: ${discounted}円`;
+    }
+  </script>
+</body>
+</html>
