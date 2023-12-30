@@ -29,11 +29,19 @@
       width: 45%;
       margin-right: 5%;
       float: left;
+      color: #522500;
     }
 
     button:nth-child(even) {
       margin-right: 0;
     }
+
+    .discount-3 { background-color: #d0eaff; }
+    .discount-5 { background-color: #e5ccab; }
+    .discount-10 { background-color: #f9e246; }
+    .discount-15 { background-color: #ffb6b6; }
+    .discount-20 { background-color: #b5d65b; }
+    .discount-30 { background-color: #ba75a7; }
 
     .tab {
       padding: 10px;
@@ -67,14 +75,15 @@
   <div id="discountTab" class="section active-section">
     <input type="number" id="amount" placeholder="金額を入力">
     <br>
-    <button onclick="applyDiscount(3)">3% 割引</button>
-    <button onclick="applyDiscount(5)">5% 割引</button>
-    <button onclick="applyDiscount(10)">10% 割引</button>
-    <button onclick="applyDiscount(15)">15% 割引</button>
-    <button onclick="applyDiscount(20)">20% 割引</button>
-    <button onclick="applyDiscount(30)">30% 割引</button>
+    <button class="discount-3" onclick="applyDiscount(3)">3% 割引</button>
+    <button class="discount-5" onclick="applyDiscount(5)">5% 割引</button>
+    <button class="discount-10" onclick="applyDiscount(10)">10% 割引</button>
+    <button class="discount-15" onclick="applyDiscount(15)">15% 割引</button>
+    <button class="discount-20" onclick="applyDiscount(20)">20% 割引</button>
+    <button class="discount-30" onclick="applyDiscount(30)">30% 割引</button>
     <div id="result"></div>
   </div>
+
 
   <!-- 税抜き計算機能のセクション -->
   <div id="taxTab" class="section">
